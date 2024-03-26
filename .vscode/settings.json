@@ -15,5 +15,6 @@
     "titleBar.inactiveBackground": "#d66a3899",
     "titleBar.inactiveForeground": "#15202b99"
   },
-  "peacock.color": "#d66a38"
+  "peacock.color": "#d66a38",
+  "rust-analyzer.linkedProjects": ["./day-12/Cargo.toml", "./day-12/Cargo.toml"]
 }
