@@ -1,21 +1,19 @@
+mod args;
 mod entities;
 mod parser;
-use pathfinding::prelude::astar;
+
+use std::time::Instant;
+
+use crate::args::get_args;
 
 fn main() {
-    let game_grid = parser::parse_input();
+    let game_grid = parser::parse_input(get_args().start_from_any_plane);
 
-    let path = astar(
-        &game_grid.start,
-        |point| {
-            game_grid
-                .get_cell_neighbors(*point)
-                .into_iter()
-                .map(|point| (point, 1))
-        },
-        |point| point.get_distance_to(game_grid.end),
-        |point| *point == game_grid.end,
-    );
+    let now = Instant::now();
 
-    println!("{:#?}", path.unwrap().1);
+    let mut solutions: Vec<isize> = game_grid.get_shortest_path_from_starts_to_end();
+
+    solutions.sort();
+
+    println!("found path {:?} in {:?}", solutions[0], now.elapsed());
 }
